@@ -1,0 +1,148 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\License;
+use Illuminate\Http\Request;
+use App\Models\Ticket;
+use App\Models\User;
+use App\Models\Customer;
+use App\Models\Product;
+
+class TicketController extends Controller
+{
+//    VIEW Ticket
+    public function index(){
+        $this->data['title'] = "Ticket Management";
+        $this->data['active'] = "ticket";
+//        $ticket = ticket::all();
+//        $this->data['ticket'] = $ticket;
+
+        $getdata = (new Ticket())->getDataLicense();
+        $this->data['ticket'] = $getdata;
+        return view('ticket.view',$this->data);
+    }
+
+//    ADD ticket
+    public function ShowViewticketAdd(){
+        $this->data['title'] = "Ticket Management";
+        $this->data['active'] = "ticket";
+
+        $getCustomer = (new License())->getCustomer();
+        $this->data['license'] = $getCustomer;
+
+        $user = User::all();
+        $this->data['user'] = $user;
+
+
+        return view('ticket.add',$this->data);
+    }
+
+    public function Addticket(Request $request){
+
+//        ADD NEW ticket
+        $ticket = new ticket();
+        $ticket->ticket_id = $request->input('ticket_id');
+        $ticket->ticket_number = $request->input('ticket_number');
+        $ticket->subject = $request->input('subject');
+        $ticket->from = $request->input('from');
+        $ticket->ticket_open = $request->input('ticket_open');
+        $ticket->license_id = $request->input('license_id');
+        $ticket->status = 'In Progress';
+        $ticket->ticket_close='-';
+        $ticket->created_by = $request->input('created_by');
+        $ticket->update_by = $request->input('update_by');
+
+        $ticket->save($request->except('update_by'));
+
+        $ticket->save();
+
+        return redirect('ticket/view')->with('success', 'The ticket have been successfully added');
+    }
+//    END OF ADD ticket
+
+//    EDIT ticket
+    function ShowViewEditticket($id){
+        $this->data['title'] = 'Ticket Management';
+        $this->data['active'] = "ticket";
+        $this->data['ticket'] = ticket::findOrFail($id);
+
+        $getCustomer = (new License())->getCustomer();
+        $this->data['license'] = $getCustomer;
+
+        $customer = Customer::all();
+        $this->data['customer'] = $customer;
+
+        $product = Product::all();
+        $this->data['product'] = $product;
+
+        $user = User::all();
+        $this->data['user'] = $user;
+
+
+        return view('ticket.edit',$this->data);
+    }
+
+    public function updateticket(Request $request, $id){
+        $ticket = ticket::findOrFail($id);
+        $ticket->update($request->except('created_by'));
+        $ticket->update($request->all());
+
+        return redirect()->route('viewticket')->with('success', 'Ticket updated successfully.');
+    }
+//    END OF EDIT ticket
+
+//    DELETE ticket
+    public function deleteticket($id)
+    {
+        $ticket = ticket::find($id);
+
+        if (!$ticket) {
+            return response()->json(['message' => 'ticket not found'], 404);
+        }
+
+        // Hapus ticket dari database
+        $ticket->delete();
+
+        return redirect()->route('viewticket')->with('success', 'Ticket deleted successfully');
+    }
+
+    public function getCustomerProducts($customer_id)
+    {
+        $customerProduct = new License();
+        $customerProducts = $customerProduct->getCustomerProduct($customer_id);
+
+        return response()->json($customerProducts);
+    }
+
+    public function getCustomerProductLicense($customer_id,$product_id)
+    {
+        $customerProductlicense = new License();
+        $customerProductlicenses = $customerProductlicense->getCustomerProductLicense($customer_id,$product_id);
+
+        return response()->json($customerProductlicenses);
+    }
+
+    //    DETAIL TICKET
+    function ShowViewDetailTicket($id){
+        $this->data['title'] = 'Ticket Progress';
+        $this->data['active'] = "ticket";
+
+        $getdata = (new Ticket())->getData();
+        $this->data['getdata'] = $getdata;
+
+        $this->data['ticket'] = Ticket::findOrFail($id);
+
+        $customer = Customer::all();
+        $this->data['customer'] = $customer;
+
+        $product = Product::all();
+        $this->data['product'] = $product;
+
+        $users = User::all();
+        $this->data['user'] = $users;
+
+        return view('ticket.detail',$this->data);
+    }
+
+}
