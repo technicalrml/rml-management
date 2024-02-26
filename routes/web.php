@@ -131,7 +131,7 @@ Route::middleware(['auth'])->group(function () {
 
     //PROGRESS
     Route::get('/ticket/{id}/UpdateProgressTicket', [TicketController::class, 'ShowProgressTicket'])->name('viewprogressticket');
-    Route::post('/ticket/addprogress', [TicketController::class, 'UpdateProgressticket'])->name('updateprogress');
+    Route::post('/ticket/{id}/addprogress', [TicketController::class, 'UpdateProgressticket'])->name('updateprogress');
     // END OF TICKET
 
 });

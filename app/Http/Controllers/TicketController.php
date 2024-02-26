@@ -156,7 +156,7 @@ class TicketController extends Controller
         return view('ticket.progress',$this->data);
     }
 
-    public function UpdateProgressticket(Request $request){
+    public function UpdateProgressticket(Request $request,$id){
 
 //        ADD NEW ticket
         $progress = new Progress();
@@ -171,7 +171,10 @@ class TicketController extends Controller
 
         $progress->save();
 
-        return redirect('ticket/detail')->with('success', 'The ticket progress have been successfully added');
+        $ticket = ticket::findOrFail($id);
+        $ticket->update($request->all());
+
+        return redirect()->route('viewticket')->with('success', 'The ticket progress have been successfully added');
     }
 
 }

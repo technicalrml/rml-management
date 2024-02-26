@@ -12,5 +12,5 @@ class Progress extends Eloquent
     use HasFactory;
     protected $connection = 'mongodb';
     protected $collection = 'ticket';
-    protected $fillable = ['name', 'price'];
+    protected $fillable = ['status', 'price'];
 }

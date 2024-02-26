@@ -5,7 +5,7 @@
 @section('toview',route('viewdetailticket',$ticket->id))
 
 @section('content')
-    <form method="POST" class="user" action="{{ route('updateprogress') }}">
+    <form method="POST" class="user" action="{{ route('updateprogress', $ticket->id) }}">
         @csrf
         <div class="row">
             <div class="col-md-6">
