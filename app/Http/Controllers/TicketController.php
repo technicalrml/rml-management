@@ -8,6 +8,7 @@ use App\Models\Ticket;
 use App\Models\User;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Models\Progress;
 
 class TicketController extends Controller
 {
@@ -128,10 +129,13 @@ class TicketController extends Controller
         $this->data['title'] = 'Ticket Progress';
         $this->data['active'] = "ticket";
 
-        $getdata = (new Ticket())->getData();
+        $getdata = (new Ticket())->getDataLicense();
         $this->data['getdata'] = $getdata;
 
-        $this->data['ticket'] = Ticket::findOrFail($id);
+        $ticket = (new Ticket())->getDataLicensedetail($id);
+        $this->data['ticket'] = $ticket;
+
+//        $this->data['ticket'] = Ticket::findOrFail($id);
 
         $customer = Customer::all();
         $this->data['customer'] = $customer;
@@ -143,6 +147,31 @@ class TicketController extends Controller
         $this->data['user'] = $users;
 
         return view('ticket.detail',$this->data);
+    }
+
+    function ShowProgressTicket($id){
+        $this->data['title'] = 'Ticket Progress Update';
+        $this->data['active'] = "ticket";
+        $this->data['ticket'] = ticket::findOrFail($id);
+        return view('ticket.progress',$this->data);
+    }
+
+    public function UpdateProgressticket(Request $request){
+
+//        ADD NEW ticket
+        $progress = new Progress();
+        $progress->ticket_id = $request->input('ticket_id');
+        $progress->ticket_number = $request->input('ticket_number');
+        $progress->from = $request->input('from');
+        $progress->to = $request->input('to');
+        $progress->status = $request->input('status');
+        $progress->description = $request->input('description');
+        $progress->update_date = $request->input('update_date');
+        $progress->update_by = $request->input('update_by');
+
+        $progress->save();
+
+        return redirect('ticket/detail')->with('success', 'The ticket progress have been successfully added');
     }
 
 }

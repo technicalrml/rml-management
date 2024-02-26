@@ -13,7 +13,7 @@ class Ticket extends Model
 
     protected $fillable = [
         'ticket_id',
-        'number_ticket',
+        'ticket_number',
         'title',
         'subject',
         'form',
@@ -42,4 +42,27 @@ class Ticket extends Model
 
 
     }
+//    public function getDataLicensedetail()
+//    {
+//        return $this->join('license', 'ticket.license_id', '=', 'license.license_id')
+//            ->join('product', 'license.product_id', '=', 'product.product_id')
+//            ->join('customer', 'license.customer_id', '=', 'customer.customer_id')
+//            ->select('ticket.*', 'product.product', 'customer.customer','license.pic')
+//            ->get();
+//
+//
+//    }
+
+    public function getDataLicensedetail($id)
+    {
+        return $this->join('license', 'ticket.license_id', '=', 'license.license_id')
+            ->join('product', 'license.product_id', '=', 'product.product_id')
+            ->join('customer', 'license.customer_id', '=', 'customer.customer_id')
+            ->join('user','license.pic','=','user.user_id')
+            ->where('ticket.id', $id) // Filter berdasarkan ID yang diberikan
+            ->select('ticket.*', 'product.product', 'customer.customer','user.name')
+            ->first(); // Mengambil satu entri tunggal, bukan sebuah koleksi
+    }
+
+
 }

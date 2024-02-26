@@ -128,6 +128,10 @@ Route::middleware(['auth'])->group(function () {
 
     //DETAIL
     Route::get('/ticket/{id}/ShowDetailTicket', [TicketController::class, 'ShowViewDetailTicket'])->name('viewdetailticket');
+
+    //PROGRESS
+    Route::get('/ticket/{id}/UpdateProgressTicket', [TicketController::class, 'ShowProgressTicket'])->name('viewprogressticket');
+    Route::post('/ticket/addprogress', [TicketController::class, 'UpdateProgressticket'])->name('updateprogress');
     // END OF TICKET
 
 });

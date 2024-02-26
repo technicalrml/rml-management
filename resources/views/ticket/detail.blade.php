@@ -39,7 +39,7 @@
                     :
                 </div>
                 <div class="col-md-6">
-                    {{ $ticket->customer_id}}
+                    {{ $ticket->customer}}
                 </div>
             </div>
             <br>
@@ -51,7 +51,7 @@
                     :
                 </div>
                 <div class="col-md-6">
-                    {{ $ticket->product_id}}
+                    {{ $ticket->product}}
                 </div>
             </div>
             <br>
@@ -94,7 +94,7 @@
                     :
                 </div>
                 <div class="col-md-6">
-                    {{ $ticket->user_id}}
+                    {{ $ticket->name}}
                 </div>
             </div>
             <br>
@@ -117,6 +117,23 @@
             </div>
         </div>
     </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <a href="{{ route('viewprogressticket', $ticket->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i><b> Update Progress</b></a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="" class="btn btn-primary col-md-12 text-left" data-toggle="collapse" data-target="#demo"><i class="fas fa-arrow-alt-circle-right"></i><b> Ticket Updated By User - DateTime</b></a>
+        </div>
+        <div id="demo" class="col-md-12 collapse"><br>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+    </div>
+    <br>
+
 @endsection
 
 

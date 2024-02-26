@@ -27,16 +27,18 @@
                                 required="" oninvalid="this.setCustomValidity('Please select your customers!')"
                                 oninput="setCustomValidity('')">
                             @foreach ($license as $licenses)
-                                <option value="{{ $licenses->license_id }}" {{ $ticket->customer_id == $licenses->customer_id ? 'selected' : '' }}>{{ $licenses->customer }} | {{ $licenses->product}} | {{ $licenses->varieties_of_products }} </option>
+                                <option value="{{ $licenses->license_id }}" {{ $licenses->license_id == $ticket->license_id ? 'selected' : '' }}>
+                                    {{ $licenses->customer }} | {{ $licenses->product}} | {{ $licenses->varieties_of_products }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-6">
                 <div class="col-md-12">
                     @include('forms.form')
                 </div>
-            </div>
-            <div class="col-md-6">
                 <div class="col-md-12">
                     @include('forms.ticket_open')
                 </div>
