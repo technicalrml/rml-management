@@ -146,6 +146,9 @@ class TicketController extends Controller
         $users = User::all();
         $this->data['user'] = $users;
 
+        $progress = Progress::all();
+        $this->data['progress'] = $progress;
+
         return view('ticket.detail',$this->data);
     }
 

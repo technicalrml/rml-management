@@ -12,5 +12,10 @@ class Progress extends Eloquent
     use HasFactory;
     protected $connection = 'mongodb';
     protected $collection = 'ticket';
-    protected $fillable = ['status', 'price'];
+//    protected $fillable = ['status', 'price'];
+
+    public static function getAllTicketsWhere($ticket_number)
+    {
+        return static::where($ticket_number)->get();
+    }
 }
