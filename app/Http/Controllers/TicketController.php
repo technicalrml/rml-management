@@ -146,7 +146,7 @@ class TicketController extends Controller
         $users = User::all();
         $this->data['user'] = $users;
 
-        $progress = Progress::all();
+        $progress = Progress::where('ticket_id', $ticket->ticket_id)->get();
         $this->data['progress'] = $progress;
 
         return view('ticket.detail',$this->data);

@@ -124,13 +124,14 @@
         </div>
     </div>
     <hr>
-    @foreach ($progress as $progresss)
+    @foreach ($progress as $data)
+    {{-- <div>{{$data}}</div> --}}
     <div class="row">
         <div class="col-md-12">
-            <ul href="" class="col-md-10 collapsed" aria-expanded="true" aria-controls="collapseUtilities" data-toggle="collapse" data-target="#demo-{{$progresss->_id}}">Ticket Updated By User - DateTime </ul>
+            <ul href="" class="col-md-10 collapsed" aria-expanded="true" aria-controls="collapseUtilities" data-toggle="collapse" data-target="#demo-{{$data->_id}}">Ticket Updated By User - <b> {{$data->update_date}} </b> </ul>
         </div>
-        <div id="demo-{{$progresss->_id}}" class="col-md-12 collapse"><br>
-           <p class="col-md-12">{{$progresss->description}}</p>
+        <div id="demo-{{$data->_id}}" class="col-md-12 collapse"><br>
+           <p class="col-md-12">{{$data->description}}</p>
         </div>
     </div>
     <hr class="sidebar-divider">

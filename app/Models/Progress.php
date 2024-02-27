@@ -18,4 +18,6 @@ class Progress extends Eloquent
     {
         return static::where($ticket_number)->get();
     }
+
+    
 }
