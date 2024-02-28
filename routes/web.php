@@ -23,6 +23,7 @@ use App\Http\Controllers\TicketController;
 Route::get('/', [LoginController::class, 'ShowViewLogin'])->name('ShowViewLogin');
 Route::post('/', [LoginController::class, 'login'])->name('login');;
 
+
 Route::middleware(['auth'])->group(function () {
     Route::post('/auth/logout', [LoginController::class, 'logout'])->name('logout');
     // ROLE
@@ -84,6 +85,9 @@ Route::middleware(['auth'])->group(function () {
     // EDIT
         Route::get('/user/{id}/ShowViewEdituser', [UserController::class, 'ShowViewEdituser'])->name('viewedituser');
         Route::put('/user/{id}', [UserController::class, 'updateuser'])->name('updateuser');
+        Route::get('/user/{id}/Profile', [UserController::class, 'ShowViewProfileuser'])->name('viewprofile');
+        Route::get('/user/{id}/ChangePassword', [UserController::class, 'ShowViewChangePassword'])->name('viewchangepassword');
+        Route::put('/user/{id}/changepassword', [UserController::class, 'changePassword'])->name('changepassword');
 
     // DELETE
         Route::get('/user/{id}', [UserController::class, 'deleteuser'])->name('deleteuser');

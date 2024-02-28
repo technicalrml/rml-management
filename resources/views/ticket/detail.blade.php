@@ -128,7 +128,7 @@
     {{-- <div>{{$data}}</div> --}}
     <div class="row">
         <div class="col-md-12">
-            <ul href="" class="col-md-10 collapsed" aria-expanded="true" aria-controls="collapseUtilities" data-toggle="collapse" data-target="#demo-{{$data->_id}}">Ticket Updated By User - <b> {{$data->update_date}} </b> </ul>
+            <ul href="" class="col-md-10 collapsed" aria-expanded="true" aria-controls="collapseUtilities" data-toggle="collapse" data-target="#demo-{{$data->_id}}">Ticket updated by <b> {{$data->from}}</b> - <b> {{$data->update_date}} </b> </ul>
         </div>
         <div id="demo-{{$data->_id}}" class="col-md-12 collapse"><br>
            <p class="col-md-12">{{$data->description}}</p>

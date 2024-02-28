@@ -73,6 +73,20 @@ class UserController extends Controller
         return view('user.edit',$this->data);
     }
 
+    function ShowViewProfileuser($id){
+        $this->data['title'] = 'Change Password';
+        $this->data['active'] = "user";
+        $this->data['users'] = User::findOrFail($id);
+
+        $getrole = (new User())->getRole();
+        $this->data['user'] = $getrole;
+
+        $role = role::all();
+        $this->data['role'] = $role;
+
+        return view('user.profile',$this->data);
+    }
+
     public function updateuser(Request $request, $id){
         $user = User::findOrFail($id);
         $request->validate([
@@ -88,6 +102,34 @@ class UserController extends Controller
         $user->update($request->all());
 
         return redirect()->route('viewuser')->with('success', 'User updated successfully.');
+    }
+
+    function ShowViewChangePassword($id){
+        $this->data['title'] = 'Change Password';
+        $this->data['active'] = "user";
+        $this->data['users'] = User::findOrFail($id);
+
+        $getrole = (new User())->getRole();
+        $this->data['user'] = $getrole;
+
+        $role = role::all();
+        $this->data['role'] = $role;
+
+        return view('user.change_password',$this->data);
+    }
+    public function changePassword(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $request->validate([
+            'password' => 'required|string|min:8',
+            'confirm_password' => 'required|string|same:password'
+        ]);
+
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('viewuser')->with('success', 'Password updated successfully.');
     }
 //    END OF EDIT USER
 

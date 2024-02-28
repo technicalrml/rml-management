@@ -1,10 +1,12 @@
 @extends('layout.action')
 @section('title',$title)
-@section('tabletitle','Edit User')
+@section('tabletitle','Profile')
 
 {{--BUTTON--}}
 @section('backbutton','view User')
 @section('toview',route('viewuser'))
+@section('valueread','readonly')
+@section('hiddenbutton','hidden')
 
 {{--FOR FORMS--}}
 @section('valuename',$users->name)
@@ -30,7 +32,7 @@
             <div class="col-md-6">
 
                 {{--                POSITION--}}
-                <div class="form-group">
+                <div class="form-group" hidden>
                     <strong><label for="role" class="text-uppercase">Position</label></strong>
                     <select class="form-control form-select" id="role_id" name="role_id" required=""
                             oninvalid="this.setCustomValidity('Please select your position!')"
@@ -61,7 +63,7 @@
         <br>
         <div class="col-md-12">
             <div class="form-group">
-                <button type="submit" class="btn btn-primary float-right text-uppercase">SAVE</button><br>
+                <button type="submit" class="btn btn-primary float-right text-uppercase">Update Profile</button><br>
             </div><br>
         </div>
     </form>

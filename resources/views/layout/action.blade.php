@@ -13,7 +13,7 @@
                     <div class="col-md-6">
                         <h1 class="h3 mb-2 text-gray-800 text-uppercase">@yield('title')</h1>
                     </div>
-                    <div class="col-md-6 text-right">
+                    <div class="col-md-6 text-right" @yield('hiddenbutton')>
                         <a href="@yield('toview')" class="btn btn-danger text-uppercase"><i class="fas fa-fw fa-backward mr-2"></i>Back To @yield('backbutton')</a>
                     </div>
                 </div>
