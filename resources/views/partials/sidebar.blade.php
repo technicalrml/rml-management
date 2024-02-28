@@ -13,6 +13,7 @@
         Interface
     </div>
 
+    @if(auth()->user()->role_id == 'RL001'||auth()->user()->role_id == 'RL002' || auth()->user()->role_id == 'RL005')
     <li class="nav-item {{ $active == 'ticket' ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
            aria-expanded="true" aria-controls="collapseUtilities">
@@ -28,7 +29,7 @@
             </div>
         </div>
     </li>
-
+    @endif
     <li class="nav-item {{ $active == 'license' ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('viewlicense') }}">
             <i class="fas fa-fw fa-list-alt"></i>
