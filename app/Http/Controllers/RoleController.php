@@ -39,7 +39,7 @@ class RoleController extends Controller
 
         $role->save();
 
-        return redirect('role/view')->with('success', 'The role have been successfully added');
+        return redirect()->route('viewrole')->with('success', 'The role have been successfully added');
     }
 //    END OF ADD role
 

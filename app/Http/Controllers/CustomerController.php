@@ -39,7 +39,7 @@ class CustomerController extends Controller
 
         $customer->save();
 
-        return redirect('customer/view')->with('success', 'The customer have been successfully added');
+        return redirect()->route('viewcustomer')->with('success', 'The customer have been successfully added');
     }
 //    END OF ADD customer
 

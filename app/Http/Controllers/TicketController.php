@@ -58,7 +58,7 @@ class TicketController extends Controller
 
         $ticket->save();
 
-        return redirect('ticket/view')->with('success', 'The ticket have been successfully added');
+        return redirect()->route('viewticket')->with('success', 'The ticket have been successfully added');
     }
 //    END OF ADD ticket
 

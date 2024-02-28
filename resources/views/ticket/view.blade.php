@@ -35,7 +35,9 @@
                 </td>
                 <td style="background-color:#FFFFFF">
                     <a href="{{ route('viewdetailticket', $tickets->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                    @if(auth()->user()->role_id == 'RL001'||auth()->user()->role_id == 'RL005')
                     <a href="{{ route('vieweditticket', $tickets->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
+                    @endif
 {{--                    <a href="{{ route('deleteticket', $tickets->id) }}" data-id="{{ $tickets->id }}" class="btn btn-danger btn-sm btn-delete" id="btn_delete" style="margin:auto;">--}}
 {{--                        <i class="fa fa-trash" aria-hidden="true"></i>--}}
 {{--                    </a>--}}

@@ -38,10 +38,12 @@
                 @endif
                 <td style="background-color:#FFFFFF">
                     <a href="{{ route('viewdetaillicense', $licenses->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                    @if(auth()->user()->role_id == 'RL001'||auth()->user()->role_id == 'RL005')
                     <a href="{{ route('vieweditlicense', $licenses->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
                     <a href="{{ route('deletelicense', $licenses->id) }}" data-id="{{ $licenses->id }}" class="btn btn-danger btn-sm btn-delete" id="btn_delete" style="margin:auto;">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
+                    @endif
                 </td>
             </tr>
         @endforeach

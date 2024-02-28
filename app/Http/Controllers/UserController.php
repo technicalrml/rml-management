@@ -54,7 +54,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('user/view')->with('success', 'User have been successfully added');
+        return redirect()->route('viewuser')->with('success', 'User have been successfully added');
     }
 //    END OF ADD USER
 

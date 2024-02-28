@@ -20,7 +20,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed...
-            return redirect()->intended('/ticket/view');
+            return redirect()->intended('/ticket');
         }
 
         return redirect()->route('ShowViewLogin')->with('error', 'Invalid credentials');

@@ -40,7 +40,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect('product/view')->with('success', 'The product have been successfully added');
+        return redirect()->route('viewproduct')->with('success', 'The product have been successfully added');
     }
 //    END OF ADD product
 

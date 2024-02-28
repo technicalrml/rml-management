@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LicenseController;
 use App\Http\Controllers\TicketController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,124 +21,140 @@ use App\Http\Controllers\TicketController;
 |
 */
 
+//ALL
 Route::get('/', [LoginController::class, 'ShowViewLogin'])->name('ShowViewLogin');
 Route::post('/', [LoginController::class, 'login'])->name('login');;
 
-
+//AUTH
 Route::middleware(['auth'])->group(function () {
+//    LOGOUT
     Route::post('/auth/logout', [LoginController::class, 'logout'])->name('logout');
-    // ROLE
-    // VIEW
-        Route::get('/role/view', [RoleController::class, 'index'])->name('viewrole');
 
-    // ADD
-        Route::get('/role/add', [RoleController::class, 'ShowViewroleAdd'])->name('viewroleadd');
-        Route::post('/role/add', [RoleController::class, 'AddRole'])->name('addrole');
+//    PROFILE
+    Route::get('/profile/{id}', [UserController::class, 'ShowViewProfileuser'])->name('viewprofile');
 
-    // EDIT
-        Route::get('/role/{id}/ShowViewEditrole', [RoleController::class, 'ShowViewEditrole'])->name('vieweditrole');
-        Route::put('/role/{id}', [RoleController::class, 'updaterole'])->name('updaterole');
+//    CHANGE PASSWORD
+    Route::get('/changepassword/{id}', [UserController::class, 'ShowViewChangePassword'])->name('viewchangepassword');
+    Route::put('/changepassword/{id}', [UserController::class, 'changePassword'])->name('changepassword');
 
-    // DELETE
-        Route::get('/role/{id}', [RoleController::class, 'deleterole'])->name('deleterole');
-    // END OF ROLE
+//    LICENSE
+//    VIEW
+    Route::get('/license', [LicenseController::class, 'index'])->name('viewlicense');
 
-    // PRODUCT
-    // VIEW
-    Route::get('/product/view', [ProductController::class, 'index'])->name('viewproduct');
+//    ADD
+    Route::get('/addlicense', [LicenseController::class, 'ShowViewlicenseAdd'])->name('viewlicenseadd');
+    Route::post('/addlicense', [LicenseController::class, 'Addlicense'])->name('addlicense');
 
-    // ADD
-    Route::get('/product/add', [ProductController::class, 'ShowViewproductAdd'])->name('viewproductadd');
-    Route::post('/product/add', [ProductController::class, 'Addproduct'])->name('addproduct');
+//    EDIT
+    Route::get('/editlicense/{id}', [LicenseController::class, 'ShowViewEditlicense'])->name('vieweditlicense');
+    Route::put('/editlicense/{id}', [LicenseController::class, 'updatelicense'])->name('updatelicense');
 
-    // EDIT
-    Route::get('/product/{id}/ShowViewEditrole', [ProductController::class, 'ShowViewEditproduct'])->name('vieweditproduct');
-    Route::put('/product/{id}', [ProductController::class, 'updateproduct'])->name('updateproduct');
+//    DELETE
+    Route::get('/deletelicense/{id}', [LicenseController::class, 'deletelicense'])->name('deletelicense');
 
-    // DELETE
-    Route::get('/product/{id}', [ProductController::class, 'deleteproduct'])->name('deleteproduct');
-    // END OF PRODUCT
+//    DETAIL
+    Route::get('/detaillicense/{id}', [LicenseController::class, 'ShowViewDetailLicense'])->name('viewdetaillicense');
 
-    // CUSTOMER
-    // VIEW
-    Route::get('/customer/view', [CustomerController::class, 'index'])->name('viewcustomer');
+//    END OF LICENSE
 
-    // ADD
-    Route::get('/customer/add', [CustomerController::class, 'ShowViewcustomerAdd'])->name('viewcustomeradd');
-    Route::post('/customer/add', [CustomerController::class, 'Addcustomer'])->name('addcustomer');
+//    PRODUCT
+//    VIEW
+    Route::get('/product', [ProductController::class, 'index'])->name('viewproduct');
 
-    // EDIT
-    Route::get('/customer/{id}/ShowViewEditrole', [CustomerController::class, 'ShowViewEditcustomer'])->name('vieweditcustomer');
-    Route::put('/customer/{id}', [CustomerController::class, 'updatecustomer'])->name('updatecustomer');
+//    ADD
+    Route::get('/addproduct', [ProductController::class, 'ShowViewproductAdd'])->name('viewproductadd');
+    Route::post('/addproduct', [ProductController::class, 'Addproduct'])->name('addproduct');
 
-    // DELETE
-    Route::get('/customer/{id}', [CustomerController::class, 'deletecustomer'])->name('deletecustomer');
-    // END OF CUSTOMER
+//    EDIT
+    Route::get('/editproduct/{id}', [ProductController::class, 'ShowViewEditproduct'])->name('vieweditproduct');
+    Route::put('/editproduct/{id}', [ProductController::class, 'updateproduct'])->name('updateproduct');
+//    DELETE
+    Route::get('/deleteproduct/{id}', [ProductController::class, 'deleteproduct'])->name('deleteproduct');
+//    END OF PRODUCT
+});
 
-    // USER
-    // VIEW
-        Route::get('/user/view', [UserController::class, 'index'])->name('viewuser');
+//ADMINISTRATOR
+Route::middleware(['auth','checkRole_id:RL001'])->group(function () {
+//    ROLE
+//    VIEW
+    Route::get('/role' ,[RoleController::class,'index'])->name('viewrole');
 
-    // ADD
-        Route::get('/user/action', [UserController::class, 'ShowViewUserAdd'])->name('viewuseradd');
-        Route::post('/user/action', [UserController::class, 'Adduser'])->name('adduser');
+//    ADD
+    Route::get('/addrole', [RoleController::class, 'ShowViewroleAdd'])->name('viewroleadd');
+    Route::post('/addrole', [RoleController::class, 'AddRole'])->name('addrole');
 
-    // EDIT
-        Route::get('/user/{id}/ShowViewEdituser', [UserController::class, 'ShowViewEdituser'])->name('viewedituser');
-        Route::put('/user/{id}', [UserController::class, 'updateuser'])->name('updateuser');
-        Route::get('/user/{id}/Profile', [UserController::class, 'ShowViewProfileuser'])->name('viewprofile');
-        Route::get('/user/{id}/ChangePassword', [UserController::class, 'ShowViewChangePassword'])->name('viewchangepassword');
-        Route::put('/user/{id}/changepassword', [UserController::class, 'changePassword'])->name('changepassword');
+//    EDIT
+    Route::get('/editrole/{role_id}', [RoleController::class, 'ShowViewEditrole'])->name('vieweditrole');
+    Route::put('/editrole/{role_id}', [RoleController::class, 'updaterole'])->name('updaterole');
 
-    // DELETE
-        Route::get('/user/{id}', [UserController::class, 'deleteuser'])->name('deleteuser');
-    // END OF USER
+//    DELETE
+    Route::get('/deleterole/{role_id}', [RoleController::class, 'deleterole'])->name('deleterole');
 
-    // LICENSE
-    // VIEW
-    Route::get('/license/view', [LicenseController::class, 'index'])->name('viewlicense');
+//    END OF ROLE
 
-    // ADD
-    Route::get('/license/action', [LicenseController::class, 'ShowViewlicenseAdd'])->name('viewlicenseadd');
-    Route::post('/license/action', [LicenseController::class, 'Addlicense'])->name('addlicense');
+//    USER
+//    VIEW
+    Route::get('/user', [UserController::class, 'index'])->name('viewuser');
 
-    // EDIT
-    Route::get('/license/{id}/ShowViewEditlicense', [LicenseController::class, 'ShowViewEditlicense'])->name('vieweditlicense');
-    Route::put('/license/{id}', [LicenseController::class, 'updatelicense'])->name('updatelicense');
+//    ADD
+    Route::get('/adduser', [UserController::class, 'ShowViewUserAdd'])->name('viewuseradd');
+    Route::post('/adduser', [UserController::class, 'Adduser'])->name('adduser');
 
-    // DELETE
-    Route::get('/license/{id}', [LicenseController::class, 'deletelicense'])->name('deletelicense');
+//    EDIT
+    Route::get('/edituser/{id}', [UserController::class, 'ShowViewEdituser'])->name('viewedituser');
+    Route::put('/edituser/{id}', [UserController::class, 'updateuser'])->name('updateuser');
 
-    //DETAIL
-    Route::get('/license/{id}/ShowDetailLicense', [LicenseController::class, 'ShowViewDetailLicense'])->name('viewdetaillicense');
-    // END OF LICENSE
+//    DELETE
+    Route::get('/deleteuser/{id}', [UserController::class, 'deleteuser'])->name('deleteuser');
+//    END OF USER
+});
 
-    // TICKET
-    // VIEW
-    Route::get('/ticket/view', [TicketController::class, 'index'])->name('viewticket');
+//ADMINISTRATOR & OWNER
+Route::middleware(['auth', 'checkRole_id:RL001,RL002'])->group(function () {
+//    CUSTOMER
+//    VIEW
+    Route::get('/customer', [CustomerController::class, 'index'])->name('viewcustomer');
 
-    // ADD
-    Route::get('/ticket/action', [TicketController::class, 'ShowViewticketAdd'])->name('viewticketadd');
-    Route::post('/ticket/action', [TicketController::class, 'Addticket'])->name('addticket');
+//    ADD
+    Route::get('/addcustomer', [CustomerController::class, 'ShowViewcustomerAdd'])->name('viewcustomeradd');
+    Route::post('/addcustomer', [CustomerController::class, 'Addcustomer'])->name('addcustomer');
 
-    // EDIT
-    Route::get('/ticket/{id}/ShowViewEditticket', [TicketController::class, 'ShowViewEditticket'])->name('vieweditticket');
-    Route::put('/ticket/{id}', [TicketController::class, 'updateticket'])->name('updateticket');
+//    EDIT
+    Route::get('/editcustomer/{id}', [CustomerController::class, 'ShowViewEditcustomer'])->name('vieweditcustomer');
+    Route::put('/editcustomer/{id}', [CustomerController::class, 'updatecustomer'])->name('updatecustomer');
 
-    // DELETE
-    Route::get('/ticket/{id}', [TicketController::class, 'deleteticket'])->name('deleteticket');
+//    DELETE
+    Route::get('/deletecustomer/{id}', [CustomerController::class, 'deletecustomer'])->name('deletecustomer');
+//    END OF CUSTOMER
+});
+
+
+Route::middleware(['auth', 'checkRole_id:RL001,RL005,RL002'])->group(function () {
+//   TICKET
+//    VIEW
+    Route::get('/ticket', [TicketController::class, 'index'])->name('viewticket');
+
+//    ADD
+    Route::get('/addticket', [TicketController::class, 'ShowViewticketAdd'])->name('viewticketadd');
+    Route::post('/addticket', [TicketController::class, 'Addticket'])->name('addticket');
+
+//    EDIT
+    Route::get('/editticket/{id}', [TicketController::class, 'ShowViewEditticket'])->name('vieweditticket');
+    Route::put('/editticket/{id}', [TicketController::class, 'updateticket'])->name('updateticket');
+
+//    DELETE
+    Route::get('/deleteticket/{id}', [TicketController::class, 'deleteticket'])->name('deleteticket');
+
+//    DETAIL
+    Route::get('/detailticket/{id}', [TicketController::class, 'ShowViewDetailTicket'])->name('viewdetailticket');
+
+//    POGRESS
+    Route::get('/progressticket/{id}/', [TicketController::class, 'ShowProgressTicket'])->name('viewprogressticket');
+    Route::post('/progressticket/{id}/addprogress', [TicketController::class, 'UpdateProgressticket'])->name('updateprogress');
 
     Route::get('/customer-products/{customer_id}', [TicketController::class, 'getCustomerProducts'])->name('getCustomerProducts');
     Route::get('/customer-products/{customer_id}/{product_id}', [TicketController::class, 'getCustomerProductLicense'])->name('getCustomerProductLicense');
-
-    //DETAIL
-    Route::get('/ticket/{id}/ShowDetailTicket', [TicketController::class, 'ShowViewDetailTicket'])->name('viewdetailticket');
-
-    //PROGRESS
-    Route::get('/ticket/{id}/UpdateProgressTicket', [TicketController::class, 'ShowProgressTicket'])->name('viewprogressticket');
-    Route::post('/ticket/{id}/addprogress', [TicketController::class, 'UpdateProgressticket'])->name('updateprogress');
-    // END OF TICKET
-
+//    END OF TICKET
 });
 
 

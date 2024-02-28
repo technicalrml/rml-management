@@ -11,7 +11,9 @@
             <th class="text-uppercase">No</th>
             <th class="text-uppercase">Customer ID</th>
             <th class="text-uppercase">Customer</th>
+            @if(auth()->user()->role_id == 'RL001'||auth()->user()->role_id == 'RL002')
             <th class="text-uppercase">Action</th>
+            @endif
         </tr>
         </thead>
         <tbody>
@@ -20,12 +22,14 @@
                 <td>{{ $index + 1 }}</td>
                 <td>{{ $customers->customer_id }}</td>
                 <td>{{ $customers->customer }}</td>
+                @if(auth()->user()->role_id == 'RL001'||auth()->user()->role_id == 'RL002')
                 <td style="background-color:#FFFFFF">
                     <a href="{{ route('vieweditcustomer', $customers->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
                     <a href="{{ route('deletecustomer', $customers->id) }}" data-id="{{ $customers->id }}" class="btn btn-danger btn-sm btn-delete" id="btn_delete" style="margin:auto;">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </td>
+                @endif
             </tr>
         @endforeach
         </tbody>

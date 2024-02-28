@@ -73,7 +73,7 @@ class LicenseController extends Controller
 
         $license->save($request->except('update_by'));
 
-        return redirect('license/view')->with('success', 'The license have been successfully added');
+        return redirect()->route('viewlicense')->with('success', 'The license have been successfully added');
     }
 //    END OF ADD LICENSE
 

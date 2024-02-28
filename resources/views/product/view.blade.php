@@ -12,7 +12,9 @@
             <th class="text-uppercase">Product ID</th>
             <th class="text-uppercase">Product</th>
             <th class="text-uppercase">Support Email</th>
+            @if(auth()->user()->role_id == 'RL001')
             <th class="text-uppercase">Action</th>
+            @endif
         </tr>
         </thead>
         <tbody>
@@ -22,12 +24,14 @@
                 <td>{{ $products->product_id }}</td>
                 <td>{{ $products->product }}</td>
                 <td>{{ $products->support_email }}</td>
+                @if(auth()->user()->role_id == 'RL001')
                 <td style="background-color:#FFFFFF">
                     <a href="{{ route('vieweditproduct', $products->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
                     <a href="{{ route('deleteproduct', $products->id) }}" data-id="{{ $products->id }}" class="btn btn-danger btn-sm btn-delete" id="btn_delete" style="margin:auto;">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </td>
+                @endif
             </tr>
         @endforeach
         </tbody>
