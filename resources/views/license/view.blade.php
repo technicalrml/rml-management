@@ -1,10 +1,16 @@
 @extends('layout.view')
 @section('title',$title)
-@section('addbutton','license')
 @section('tabletitle','license')
-@section('toaction', route('addlicense'))
 @section('viewdetail','viewlicensedetail')
 @section('titledetail','License Detail')
+
+@section('validationbutton')
+    @if(auth()->user()->role_id == 'RL001' || auth()->user()->role_id == 'RL002' || auth()->user()->role_id == 'RL004')
+        <div class="col-md-6 text-right">
+            <a href="{{ route('addlicense') }}" class="btn btn-primary text-uppercase"><i class="fas fa-fw fa-plus-square mr-2"></i>Added license</a>
+        </div>
+    @endif
+@endsection
 
 @section('content')
     <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
@@ -38,7 +44,7 @@
                 @endif
                 <td style="background-color:#FFFFFF">
                     <a href="{{ route('viewdetaillicense', $licenses->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
-                    @if(auth()->user()->role_id == 'RL001'||auth()->user()->role_id == 'RL005')
+                    @if(auth()->user()->role_id == 'RL001'|| auth()->user()->role_id == 'RL004' || auth()->user()->role_id == 'RL005')
                     <a href="{{ route('vieweditlicense', $licenses->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
                     <a href="{{ route('deletelicense', $licenses->id) }}" data-id="{{ $licenses->id }}" class="btn btn-danger btn-sm btn-delete" id="btn_delete" style="margin:auto;">
                         <i class="fa fa-trash" aria-hidden="true"></i>

@@ -1,8 +1,14 @@
 @extends('layout.view')
 @section('title',$title)
-@section('addbutton','customer')
 @section('tabletitle','customer')
-@section('toaction', route('addcustomer'))
+
+@section('validationbutton')
+    @if(auth()->user()->role_id == 'RL001' || auth()->user()->role_id == 'RL002')
+        <div class="col-md-6 text-right">
+            <a href="{{ route('addcustomer') }}" class="btn btn-primary text-uppercase"><i class="fas fa-fw fa-plus-square mr-2"></i>Added customer</a>
+        </div>
+    @endif
+@endsection
 
 @section('content')
     <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">

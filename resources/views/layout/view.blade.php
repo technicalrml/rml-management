@@ -13,9 +13,10 @@
                             <div class="col-md-6">
                                 <h1 class="h3 mb-2 text-gray-800 text-uppercase">@yield('title')</h1>
                             </div>
-                            <div class="col-md-6 text-right">
-                                <a href="@yield('toaction')" class="btn btn-primary text-uppercase"><i class="fas fa-fw fa-plus-square mr-2"></i>Added @yield('addbutton')</a>
-                            </div>
+                            @yield('validationbutton')
+{{--                            <div class="col-md-6 text-right">--}}
+{{--                                <a href="@yield('toaction')" class="btn btn-primary text-uppercase"><i class="fas fa-fw fa-plus-square mr-2"></i>Added @yield('addbutton')</a>--}}
+{{--                            </div>--}}
                         </div>
                         <br>
                         <div class="row">

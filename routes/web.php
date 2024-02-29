@@ -41,36 +41,11 @@ Route::middleware(['auth'])->group(function () {
 //    VIEW
     Route::get('/license', [LicenseController::class, 'index'])->name('viewlicense');
 
-//    ADD
-    Route::get('/addlicense', [LicenseController::class, 'ShowViewlicenseAdd'])->name('viewlicenseadd');
-    Route::post('/addlicense', [LicenseController::class, 'Addlicense'])->name('addlicense');
-
-//    EDIT
-    Route::get('/editlicense/{id}', [LicenseController::class, 'ShowViewEditlicense'])->name('vieweditlicense');
-    Route::put('/editlicense/{id}', [LicenseController::class, 'updatelicense'])->name('updatelicense');
-
-//    DELETE
-    Route::get('/deletelicense/{id}', [LicenseController::class, 'deletelicense'])->name('deletelicense');
-
-//    DETAIL
-    Route::get('/detaillicense/{id}', [LicenseController::class, 'ShowViewDetailLicense'])->name('viewdetaillicense');
-
-//    END OF LICENSE
-
 //    PRODUCT
 //    VIEW
     Route::get('/product', [ProductController::class, 'index'])->name('viewproduct');
 
-//    ADD
-    Route::get('/addproduct', [ProductController::class, 'ShowViewproductAdd'])->name('viewproductadd');
-    Route::post('/addproduct', [ProductController::class, 'Addproduct'])->name('addproduct');
 
-//    EDIT
-    Route::get('/editproduct/{id}', [ProductController::class, 'ShowViewEditproduct'])->name('vieweditproduct');
-    Route::put('/editproduct/{id}', [ProductController::class, 'updateproduct'])->name('updateproduct');
-//    DELETE
-    Route::get('/deleteproduct/{id}', [ProductController::class, 'deleteproduct'])->name('deleteproduct');
-//    END OF PRODUCT
 });
 
 //ADMINISTRATOR
@@ -126,14 +101,31 @@ Route::middleware(['auth', 'checkRole_id:RL001,RL002'])->group(function () {
 //    DELETE
     Route::get('/deletecustomer/{id}', [CustomerController::class, 'deletecustomer'])->name('deletecustomer');
 //    END OF CUSTOMER
+
+//    PRODUCT
+//    ADD
+    Route::get('/addproduct', [ProductController::class, 'ShowViewproductAdd'])->name('viewproductadd');
+    Route::post('/addproduct', [ProductController::class, 'Addproduct'])->name('addproduct');
+
+//    EDIT
+    Route::get('/editproduct/{id}', [ProductController::class, 'ShowViewEditproduct'])->name('vieweditproduct');
+    Route::put('/editproduct/{id}', [ProductController::class, 'updateproduct'])->name('updateproduct');
+//    DELETE
+    Route::get('/deleteproduct/{id}', [ProductController::class, 'deleteproduct'])->name('deleteproduct');
+//    END OF PRODUCT
 });
 
-
+//ADMINISTRATOR, TECHNICAL & OWNER
 Route::middleware(['auth', 'checkRole_id:RL001,RL005,RL002'])->group(function () {
 //   TICKET
 //    VIEW
     Route::get('/ticket', [TicketController::class, 'index'])->name('viewticket');
 
+});
+
+//ADMINISTRATOR & TECHNICAL
+Route::middleware(['auth', 'checkRole_id:RL001,RL005'])->group(function () {
+//    TICKET
 //    ADD
     Route::get('/addticket', [TicketController::class, 'ShowViewticketAdd'])->name('viewticketadd');
     Route::post('/addticket', [TicketController::class, 'Addticket'])->name('addticket');
@@ -157,5 +149,22 @@ Route::middleware(['auth', 'checkRole_id:RL001,RL005,RL002'])->group(function ()
 //    END OF TICKET
 });
 
+Route::middleware(['auth', 'checkRole_id:RL001,RL005,RL002,RL004'])->group(function () {
+//    LICENSE
+//    ADD
+    Route::get('/addlicense', [LicenseController::class, 'ShowViewlicenseAdd'])->name('viewlicenseadd');
+    Route::post('/addlicense', [LicenseController::class, 'Addlicense'])->name('addlicense');
 
+//    EDIT
+    Route::get('/editlicense/{id}', [LicenseController::class, 'ShowViewEditlicense'])->name('vieweditlicense');
+    Route::put('/editlicense/{id}', [LicenseController::class, 'updatelicense'])->name('updatelicense');
+
+//    DELETE
+    Route::get('/deletelicense/{id}', [LicenseController::class, 'deletelicense'])->name('deletelicense');
+
+//    DETAIL
+    Route::get('/detaillicense/{id}', [LicenseController::class, 'ShowViewDetailLicense'])->name('viewdetaillicense');
+
+//    END OF LICENSE
+});
 
