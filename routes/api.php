@@ -21,4 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login-mobile',[AuthController::class, 'login']);
-Route::get('ticket',[TicketController::class, 'getTicket']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('ticket',[TicketController::class, 'getTicket']);
+});
+
