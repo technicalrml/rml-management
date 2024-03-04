@@ -45,7 +45,8 @@ class AuthController extends Controller
                 'status_code' => 200,
                 'success' => true,
                 'data' => [
-                    'Nama' => $request->user()->name,
+                    'nama' => $request->user()->name,
+                    'email' => $request->user()->email,
                     'access_token' => $tokenResult,
                     'token_type' => 'Bearer',
                     'user_id' => $request->user()->id,
