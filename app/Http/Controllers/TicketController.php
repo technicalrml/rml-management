@@ -160,8 +160,14 @@ class TicketController extends Controller
         $users = User::all();
         $this->data['user'] = $users;
 
-        $progress = Progress::where('ticket_id', $ticket->ticket_id)->get();
+//        $progress = Progress::where('ticket_id', $ticket->ticket_id)->get();
+//        $this->data['progress'] = $progress;
+
+        $progress = Progress::where('ticket_id', $ticket->ticket_id)
+            ->orderBy('created_at', 'desc') // Sort by created_at column in descending order
+            ->get();
         $this->data['progress'] = $progress;
+
 
         return view('ticket.detail',$this->data);
     }
