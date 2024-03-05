@@ -38,6 +38,18 @@ class Ticket extends Model
         return $this->join('license', 'ticket.license_id', '=', 'license.license_id')
             ->join('product', 'license.product_id', '=', 'product.product_id')
             ->join('customer', 'license.customer_id', '=', 'customer.customer_id')
+            ->where('ticket.status', '=', 'In Progress')
+            ->select('ticket.*', 'product.product', 'customer.customer')
+            ->get();
+
+
+    }
+    public function TicketClose()
+    {
+        return $this->join('license', 'ticket.license_id', '=', 'license.license_id')
+            ->join('product', 'license.product_id', '=', 'product.product_id')
+            ->join('customer', 'license.customer_id', '=', 'customer.customer_id')
+            ->where('ticket.status', '=', 'Closed')
             ->select('ticket.*', 'product.product', 'customer.customer')
             ->get();
 

@@ -21,8 +21,22 @@ class TicketController extends Controller
 
         $getdata = (new Ticket())->getDataLicense();
         $this->data['ticket'] = $getdata;
+
         return view('ticket.view',$this->data);
     }
+
+    public function ticketclose(){
+        $this->data['title'] = "Ticket Management";
+        $this->data['active'] = "ticket";
+//        $ticket = ticket::all();
+//        $this->data['ticket'] = $ticket;
+
+        $getdata = (new Ticket())->TicketClose();
+        $this->data['ticket'] = $getdata;
+
+        return view('ticket.viewticketclose',$this->data);
+    }
+
 
 //    ADD ticket
     public function ShowViewticketAdd(){

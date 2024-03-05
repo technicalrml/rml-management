@@ -25,24 +25,27 @@
 <script>
     $(document).ready(function () {
         $('#dataTable').DataTable({
-            scrollX: true,
-            scrollY: 300,
-            scrollCollapse: true,
-            dom: '<"row"<"col-md-6"B><"col-md-6"f>>rtip',
-            buttons: [
+            paging: false,
+            "scrollX": true,
+            "scrollY": 300,
+            "scrollCollapse": true,
+            "lengthMenu": [[10, 25, 50, 75, 100], [10, 25, 50, 75, 100]], // Set the page length menu options
+            "dom": '<"row"<"col-md-6"B><"col-md-6"f>>rtip',
+            "buttons": [
                 {
-                    extend: 'copy',
-                    text: '<i class="fa fa-copy"></i>&nbsp;&nbsp;COPY',
-                    className: 'btn bg-light text-black',
+                    "extend": 'copy',
+                    "text": '<i class="fa fa-copy"></i>&nbsp;&nbsp;COPY',
+                    "className": 'btn bg-light text-black',
                 },
                 {
-                    extend: 'excel',
-                    text: '<i class="fa fa-file-excel"></i>&nbsp;&nbsp;EXCEL',
-                    className: 'btn bg-success text-white',
+                    "extend": 'excel',
+                    "text": '<i class="fa fa-file-excel"></i>&nbsp;&nbsp;EXCEL',
+                    "className": 'btn bg-success text-white',
                 },
             ],
         });
     });
+
 
 </script>
 

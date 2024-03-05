@@ -12,20 +12,24 @@
     <div class="sidebar-heading">
         Interface
     </div>
-
+    <li class="nav-item {{ $active == 'dashboard' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('dashboard') }}">
+            <i class="fas fa-fw fa-list-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
     @if(auth()->user()->role_id == 'RL001'||auth()->user()->role_id == 'RL002' || auth()->user()->role_id == 'RL005')
     <li class="nav-item {{ $active == 'ticket' ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
            aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-ticket-alt"></i>
-            <span>Cases Open</span>
+            <span>Cases</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
              data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Tickets </h6>
-                <a class="collapse-item" href="{{ route('viewticket') }}">Customer</a>
-                <a class="collapse-item" href="{{ route('viewticket') }}">Principle</a>
+                <a class="collapse-item" href="{{ route('viewticket') }}">Ticket Open</a>
+                <a class="collapse-item" href="{{ route('viewticketclose') }}">Ticket Close</a>
             </div>
         </div>
     </li>

@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LicenseController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -29,6 +30,8 @@ Route::post('/', [LoginController::class, 'login'])->name('login');;
 Route::middleware(['auth'])->group(function () {
 //    LOGOUT
     Route::post('/auth/logout', [LoginController::class, 'logout'])->name('logout');
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 //    PROFILE
     Route::get('/profile/{id}', [UserController::class, 'ShowViewProfileuser'])->name('viewprofile');
@@ -119,7 +122,8 @@ Route::middleware(['auth', 'checkRole_id:RL001,RL002'])->group(function () {
 Route::middleware(['auth', 'checkRole_id:RL001,RL005,RL002'])->group(function () {
 //   TICKET
 //    VIEW
-    Route::get('/ticket', [TicketController::class, 'index'])->name('viewticket');
+    Route::get('/ticketopen', [TicketController::class, 'index'])->name('viewticket');
+    Route::get('/ticketclose', [TicketController::class, 'ticketclose'])->name('viewticketclose');
 
 });
 
