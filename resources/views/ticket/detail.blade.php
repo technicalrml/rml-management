@@ -78,10 +78,11 @@
                     :
                 </div>
                 <div class="col-md-6">
-                    @if($ticket->ticket_close != '-')
-                        {{ \Carbon\Carbon::parse($ticket->ticket_close)->translatedFormat('d F Y') }}
-                    @else
+{{--                    {{ \Carbon\Carbon::parse($ticket->ticket_close)->translatedFormat('d F Y') }}--}}
+                    @if($ticket->ticket_close == '-')
                         Ticket is not closed yet
+                    @else
+                        {{ \Carbon\Carbon::parse($ticket->ticket_close)->translatedFormat('d F Y') }}
                     @endif
                 </div>
             </div>
@@ -113,6 +114,18 @@
                             <span class="btn btn-danger btn-sm"><b>{{ $ticket->status }}</b></span>
                         @endif
                     </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    Ball Position
+                </div>
+                <div class="col-md-1">
+                    :
+                </div>
+                <div class="col-md-6">
+                    {{--                    {{ $ticket->ball_position}}--}}
+                    <span class="btn btn-primary btn-sm"><b>{{ $ticket->ball_position }}</b></span>
                 </div>
             </div>
         </div>

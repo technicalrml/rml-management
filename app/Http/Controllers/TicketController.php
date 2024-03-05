@@ -175,6 +175,12 @@ class TicketController extends Controller
         $progress->save();
 
         $ticket = ticket::findOrFail($id);
+        $ticket->status = $request->input('status');
+        if ($ticket->status === 'Closed') {
+            $ticket->ticket_close = $request->input('update_date');
+            // Sesuaikan nama properti di atas dengan properti yang ada pada model Ticket
+        }
+        $ticket->ball_position = $request->input('to');
         $ticket->update($request->all());
 
         return redirect()->route('viewticket')->with('success', 'The ticket progress have been successfully added');

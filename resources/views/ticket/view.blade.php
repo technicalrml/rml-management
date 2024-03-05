@@ -19,6 +19,7 @@
             <th class="text-uppercase">Product</th>
             <th class="text-uppercase">Subject</th>
             <th class="text-uppercase">Customer</th>
+            <th class="text-uppercase">Ball Position</th>
             <th class="text-uppercase" style="width: 11%">Status</th>
             <th class="text-uppercase">Action</th>
         </tr>
@@ -31,7 +32,7 @@
                 <td>{{ $tickets->product }}</td>
                 <td>{{ $tickets->subject }}</td>
                 <td>{{ $tickets->customer }}</td>
-
+                <td>{{ $tickets->ball_position }}</td>
                 <td style="text-align: center;">
                     @if($tickets->status == 'In Progress')
                         <span class="btn btn-success btn-sm"><b>{{ $tickets->status }}</b></span>

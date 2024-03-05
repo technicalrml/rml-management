@@ -22,7 +22,8 @@ class Ticket extends Model
         'license_id',
         'created_by',
         'update_by',
-        'status'
+        'status',
+        'ball_position'
     ];
     protected static function boot()
     {
